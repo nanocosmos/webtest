@@ -40,7 +40,7 @@ export default function App() {
 
   return (
     <div className={classes.root}>
-      <Router basename="/demo">
+      <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route exact path="/" component={LandingPage}/>
           <Route path="/free-trial" component={FreeTrial}/>
