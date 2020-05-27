@@ -4,15 +4,23 @@ import { Typography, Button } from '@material-ui/core';
 import * as link from '../../../utilities/link-config';
 import image from '../../../assets/icons/white-404.png';
 import Alternative from './Alternative';
+import RedirectLink from '../../withStyles/RedirectLink';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         [theme.breakpoints.up('xs')]: {
-            height: '100%'
+            minHeight: 'calc(100vh - 200px)',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingBottom: theme.spacing(3)
         },
         [theme.breakpoints.up('md')]: {
             width: '80%',
-            margin: '0 auto'
+            margin: '0 auto',
+            paddingBottom: 0
         },
         [theme.breakpoints.up('lg')]: {
             width: '50%'
@@ -22,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('xs')]: {
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            alignItems: 'center'
         },
         [theme.breakpoints.up('md')]: {
             flexDirection: 'row',
@@ -120,19 +129,21 @@ export default function NotFound(props) {
                         You may have misstyped the address or the page may have moved.
                     </Typography>
                     <div>
-                        <Button variant="contained" color="secondary" onClick={() => { window.open(link.LANDING_PAGE, '_self')}}>
-                            Go to homepage
+                        <Button variant="contained" color="secondary">
+                            <RedirectLink to={link.LANDING_PAGE}>
+                                Go to homepage
+                            </RedirectLink>
                         </Button>
                     </div>
                 </div>
                 <div className={classes.imageWrapper}>
-                    <img className={classes.image} src={image}/>
+                    <img className={classes.image} src={image} />
                 </div>
             </div>
             <div className={classes.alternativeWrapper}>
                 {
                     alternative.map((item, index) => (
-                        <Alternative description={item} key={index}/>
+                        <Alternative description={item} key={index} />
                     ))
                 }
             </div>

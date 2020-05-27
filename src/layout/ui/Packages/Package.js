@@ -5,6 +5,7 @@ import * as link from '../../../utilities/link-config';
 
 import Including from './Including';
 import AddOn from './AddOn';
+import RedirectLink from '../../withStyles/RedirectLink';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -174,9 +175,10 @@ export default function Package(props) {
                         variant="outlined" 
                         color="primary" 
                         size="small"
-                        onClick={() => window.open(link.PAGE_GET_A_QUOTE, "_self")}
                     >
-                        Contact us
+                        <RedirectLink to={link.PAGE_GET_A_QUOTE}>
+                            Contact us
+                        </RedirectLink>
                     </Button>
                     <Button 
                         variant="contained" 

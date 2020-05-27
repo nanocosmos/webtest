@@ -1,9 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { NavLink } from 'react-router-dom';
 import { Typography, Grid, Button } from '@material-ui/core';
 
 import * as link from '../../../utilities/link-config';
 import image from '../../../assets/icons/white-laptop-rocket.png'
+import RedirectLink from '../../withStyles/RedirectLink';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -65,9 +67,11 @@ export default function ExploreBanner() {
                 <Button
                     variant="contained"
                     color="secondary"
-                    onClick={() => { window.open(link.PAGE_EXPLORE, "_self") }}
                 >
+                    <RedirectLink to={link.PAGE_EXPLORE}>
+
                     Start Journey
+                    </RedirectLink>
                 </Button>
             </Grid>
         </div>

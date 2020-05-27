@@ -39,7 +39,7 @@ export default function Usecase(props) {
 
 
     return (
-        <Grid item xs={12} className={classes.root} onClick={() => { window.open(props.link, "_self") }}>
+        <Grid item xs={12} className={classes.root} href={props.link}>
             <img className={classes.icon} src={props.image} />
             <Typography className={classes.title} variant="h6">
                 {props.title}

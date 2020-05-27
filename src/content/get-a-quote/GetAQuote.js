@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function BookPackage() {
+export default function GetAQuote() {
   const classes = useStyles();
   
   return (

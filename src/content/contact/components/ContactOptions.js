@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Button } from '@material-ui/core';
-import { ArrowRightAlt } from '@material-ui/icons';
+import { Typography } from '@material-ui/core';
 import * as link from '../../../utilities/link-config';
 
 import mobile from '../../../assets/icons/white-mobile.png';
@@ -56,18 +56,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ContactOptions() {
     const classes = useStyles();
+    const [redirectRoute, setRedirectRoute] = useState(null);
+
     const contactOptions = [
-        { text: "Get in touch", image: mobile, link: link.CONTACT },
-        { text: "Support", image: support, link: link.SUPPORT },
+        // { text: "Get in touch", image: mobile, link: link.CONTACT },
+        // { text: "Support", image: support, link: link.SUPPORT },
         { text: "Get a quote", image: quote, link: link.PAGE_GET_A_QUOTE },
     ]
 
+    const redirect = (link) => {
+        setRedirectRoute(<Redirect to={link}/>)
+    }
+
     return (
         <div className={classes.root}>
+            {redirectRoute}
             <div className={classes.contentWrapper}>
             {
                 contactOptions.map((option, index) => (
-                    <div key={`${option.text}-${index}`} className={classes.contactOptionWrapper} onClick={ () => { window.open(option.link, '_self') }}>
+                    <div key={`${option.text}-${index}`} className={classes.contactOptionWrapper} onClick={() => { redirect(option.link) }}>
                         <img className={classes.image} src={option.image}/>
                         <Typography className={classes.text} variant="button">
                             {option.text}

@@ -10,6 +10,7 @@ import webcasts from '../../../assets/icons/orange-webcasts.png';
 import Usecase from '../../../layout/ui/Usecase';
 import HeaderWrapper from '../../../layout/withStyles/Header/Wrapper';
 import BoldTitle from '../../../layout/withStyles/Header/BoldTitle';
+import RedirectLink from '../../../layout/withStyles/RedirectLink';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -88,8 +89,10 @@ export default function Intro() {
                         />
                     </div>
                 </Grid>
-                <Button onClick={() => { window.open(link.PAGE_USECASES, "_self") }} color="primary" variant="contained">
-                    See more usecases
+                <Button color="primary" variant="contained">
+                    <RedirectLink to={link.PAGE_USECASES}>
+                        See more usecases
+                    </RedirectLink>
                 </Button>
             </Grid>
         </div>

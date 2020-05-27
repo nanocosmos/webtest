@@ -109,7 +109,7 @@ export default function Explanation() {
                 </Typography>
                 <div className={classes.buttonWrapper}>
                     <Button
-                        onClick={() => { window.open(link.BLOG_APPS, '_self') }}
+                        href={link.BLOG_APPS}
                         color="primary"
                         className={classes.button}
                         variant="outlined"

@@ -4,6 +4,7 @@ import { Typography, Grid, Button } from '@material-ui/core';
 import * as link from '../../../utilities/link-config';
 
 import logo from '../../../assets/logo/white-atw-logo.png';
+import RedirectLink from '../../../layout/withStyles/RedirectLink';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -129,17 +130,19 @@ export default function Intro() {
                                 color="secondary"
                                 variant="contained"
                                 className={classes.button}
-                                onClick={() => { window.open(link.PAGE_PRICING, "_self") }}
                             >
-                                Book a package
+                                <RedirectLink to={link.PAGE_PRICING}>
+                                    Book a package
+                                </RedirectLink>
                             </Button>
                             <Button
                                 color="secondary"
                                 variant="outlined"
                                 className={classes.button}
-                                onClick={() => { window.open(link.PAGE_FREE_TRIAL, "_self") }}
                             >
-                                Free trial
+                                <RedirectLink to={link.PAGE_FREE_TRIAL}>
+                                    Free trial
+                                </RedirectLink>
                             </Button>
                         </div>
                     </div>

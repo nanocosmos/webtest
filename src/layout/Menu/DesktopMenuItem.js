@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
+import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormControl, Typography, ListItem, Button, List, Popper } from '@material-ui/core';
 
@@ -44,6 +45,7 @@ export default function DesktopMenuItem(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
     const [showSubmenu, setShowSubmenu] = useState(false);
+    const [redirectRoute, setRedirectRoute] = useState(null);
 
 
     const handleOpenSubmenu = (event) => {
@@ -57,7 +59,7 @@ export default function DesktopMenuItem(props) {
     }
 
     const redirect = (link) => {
-        window.open(`${link}`, "_self")
+        setRedirectRoute(<Redirect to={link}/>)
         setShowSubmenu(false);
         setAnchorEl(null);
         // PROPS
@@ -72,6 +74,7 @@ export default function DesktopMenuItem(props) {
             className={classes.root}
             onMouseLeave={closeSubmenu}
         >
+            {redirectRoute}
             <Button
                 className={button}
                 onClick={(event) => { props.menuItem.submenu ? handleOpenSubmenu(event) : redirect(props.menuItem.link) }}

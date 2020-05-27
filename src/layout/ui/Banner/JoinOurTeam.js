@@ -4,6 +4,7 @@ import { Typography, Grid, Button } from '@material-ui/core';
 
 import * as link from '../../../utilities/link-config';
 import rocket from '../../../assets/icons/white-rocket.png';
+import RedirectLink from '../../withStyles/RedirectLink';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,7 +51,7 @@ export default function JoinOurTeamBanner() {
         <div className={classes.root}>
             <Grid container className={classes.container}>
                 <Grid item xs={12}>
-                    <img className={classes.icon} src={rocket}/>
+                    <img className={classes.icon} src={rocket} />
                 </Grid>
                 <Grid className={classes.item} item xs={12}>
                     <div className={classes.textWrapper}>
@@ -65,9 +66,10 @@ export default function JoinOurTeamBanner() {
                 <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => { window.open(link.PAGE_CAREERS, "_self") }}
                 >
-                    Apply
+                    <RedirectLink to={link.PAGE_CAREERS}>
+                        Apply
+                    </RedirectLink>
                 </Button>
             </Grid>
         </div>

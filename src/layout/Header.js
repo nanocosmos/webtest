@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Button } from '@material-ui/core';
 import * as link from '../utilities/link-config';
@@ -43,13 +44,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header(props) {
     const classes = useStyles();
+    const [redirectRoute, setRedirectRoute] = useState(null);
 
+    const redirect = (link) => {
+        setRedirectRoute(<Redirect to={link} />)
+    }
 
     return (
         <AppBar className={classes.root} elevation={0} position="sticky">
+            {redirectRoute}
             <Toolbar className={classes.toolbar}>
-                <img className={classes.logo} src={Logo} onClick={() => { window.open(link.LANDING_PAGE, "_self") }} />
-                <Menu className={classes.menu}/>
+                <img className={classes.logo} src={Logo} onClick={() => { redirect(link.LANDING_PAGE) }} />
+                <Menu className={classes.menu} />
             </Toolbar>
         </AppBar>
     );

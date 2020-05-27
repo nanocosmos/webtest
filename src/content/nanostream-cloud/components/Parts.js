@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Redirect } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 import * as link from '../../../utilities/link-config';
 
@@ -79,6 +80,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Parts() {
     const classes = useStyles();
+    const [redirectRoute, setRedirectRoute] = useState(null);
     const [parts] = useState([
         { title: "nanoStream Webcaster", image: webcaster, link: link.PAGE_WEBCASTER },
         { title: "nanoStream H5Live Player", image: h5live, link: link.PAGE_H5LIVE },
@@ -86,8 +88,12 @@ export default function Parts() {
         { title: "nanoStream CDN", image: cdn, link: link.PAGE_CDN },
     ])
 
+    const redirect = (link) => {
+        setRedirectRoute(<Redirect to={link}/>)
+    }
     return (
         <div className={classes.root}>
+            {redirectRoute}
             <HeaderWrapper align="center">
                 <Overline variant="button" color="secondary">
                     Discover
@@ -99,8 +105,8 @@ export default function Parts() {
             <div className={classes.partsWrapper}>
                 {
                     parts.map((part, index) => (
-                        <div key={`${part.title}-${index}`} className={classes.part} onClick={() => { window.open(part.link, "_self") }}>
-                            <img className={classes.image} src={part.image}/>
+                        <div key={`${part.title}-${index}`} className={classes.part} onClick={() => { redirect(part.link) }}>
+                            <img className={classes.image} src={part.image} />
                             <Typography className={classes.description} variant="h6">
                                 {part.title}
                             </Typography>

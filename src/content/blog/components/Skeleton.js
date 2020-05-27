@@ -164,7 +164,7 @@ function Article(props) {
                         size="small"
                         color="primary"
                         endIcon={<ArrowRightAlt />}
-                        onClick={() => window.open(`${link.PAGE_ARTICLE}?&q=${props.article.id}`, '_self')}>
+                        onClick={() => window.open(`${link.PAGE_ARTICLE}?q=${props.article.id}`, '_self')}>
                         Read more
                     </Button>
             }

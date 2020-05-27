@@ -68,7 +68,7 @@ export default function Positions() {
                     <Button
                         variant="contained"
                         color="secondary"
-                        onClick={() => { window.open(link.BLOG_JOBS, "_self")}}
+                        href={link.BLOG_JOBS}
                         endIcon={<ArrowRightAlt />}
                     >
                         Blog

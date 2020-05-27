@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Button } from '@material-ui/core';
 import * as link from '../../../utilities/link-config';
+import { Redirect } from 'react-router-dom';
 
 import cloud from '../../../assets/icons/white-rocket.png';
-import h5live from '../../../assets/icons/white-play.png';
-import webcaster from '../../../assets/icons/white-webcasts.png';
 import apps from '../../../assets/icons/white-apps.png';
 
 import BoldTitle from '../../../layout/withStyles/Header/BoldTitle';
 import Overline from '../../../layout/withStyles/Header/Overline';
 import Underline from '../../../layout/withStyles/Header/Underline';
 import HeaderWrapper from '../../../layout/withStyles/Header/Wrapper';
+import RedirectLink from '../../../layout/withStyles/RedirectLink';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -74,13 +74,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function OurProducts() {
     const classes = useStyles();
+    const [redirectRoute, setRedirectRoute] = useState(null);
     const products = [
         { name: "nanoStream Cloud", image: cloud, link: link.PAGE_NANOSTREAMCLOUD },
         { name: "nanoStream Apps & SDKs", image: apps, link: link.PAGE_APPS_AND_SDKS },
     ]
 
+    const redirect = (link) => {
+        setRedirectRoute(<Redirect to={link} />)
+        // PROPS
+    }
+
     return (
         <div className={classes.root}>
+            {redirectRoute}
             <HeaderWrapper align="center">
                 <Overline color="secondary">
                     Instant Live Video Streaming with your brand
@@ -93,7 +100,7 @@ export default function OurProducts() {
             <div className={classes.productWrapper}>
                 {
                     products.map((product, index) => (
-                        <div key={`${product.name}-${index}`} className={classes.product} onClick={() => { window.open(product.link, "_self") }}>
+                        <div key={`${product.name}-${index}`} className={classes.product} onClick={() => { redirect(product.link) }}>
                             <img className={classes.image} src={product.image} />
                             <Typography className={classes.bodytext} variant="body1">
                                 {product.name}
@@ -103,8 +110,10 @@ export default function OurProducts() {
                 }
             </div>
             <div className={classes.exploreButtonWrapper}>
-                <Button onClick={() => { window.open(link.PAGE_EXPLORE, '_self') }} variant="contained" color="secondary">
-                    Explore our Products
+                <Button variant="contained" color="secondary">
+                    <RedirectLink to={link.PAGE_EXPLORE}>
+                        Explore our Products
+                    </RedirectLink>
                 </Button>
             </div>
         </div>

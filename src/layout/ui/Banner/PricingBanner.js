@@ -4,6 +4,7 @@ import { Typography, Grid, Button } from '@material-ui/core';
 import * as link from '../../../utilities/link-config';
 
 import icon from '../../../assets/icons/white-package.png';
+import RedirectLink from '../../withStyles/RedirectLink';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,7 +51,7 @@ export default function PricingBanner() {
         <div className={classes.root}>
             <Grid container className={classes.container}>
                 <Grid item xs={12}>
-                    <img className={classes.icon} src={icon}/>
+                    <img className={classes.icon} src={icon} />
                 </Grid>
                 <Grid className={classes.item} item xs={12}>
                     <div className={classes.textWrapper}>
@@ -65,9 +66,10 @@ export default function PricingBanner() {
                 <Button
                     variant="contained"
                     color="secondary"
-                    onClick={() => { window.open(link.PAGE_FREE_TRIAL, "_self") }}
                 >
-                    See more
+                    <RedirectLink to={link.PAGE_FREE_TRIAL}>
+                        See more
+                    </RedirectLink>
                 </Button>
             </Grid>
         </div>

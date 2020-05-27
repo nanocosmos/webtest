@@ -12,6 +12,7 @@ import CloudItem from '../../../layout/ui/CloudItem';
 import HeaderWrapper from '../../../layout/withStyles/Header/Wrapper';
 import Overline from '../../../layout/withStyles/Header/Overline';
 import BoldTitle from '../../../layout/withStyles/Header/BoldTitle';
+import RedirectLink from '../../../layout/withStyles/RedirectLink';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -122,12 +123,17 @@ export default function Intro() {
                         <Button
                             variant="contained"
                             color="secondary"
-                            onClick={() => window.open(link.PAGE_FREE_TRIAL, "_self")}
                         >
-                            Start your free trial now
+                            <RedirectLink to={link.PAGE_FREE_TRIAL}>
+                                Start your free trial now
+                            </RedirectLink>
                         </Button>
                         <Typography className={classes.link}>
-                            <Link color="secondary" onClick={() => { window.open(link.PAGE_CONTACT, "_self") }}>or contact us for more</Link>
+                            <Link color="secondary">
+                                <RedirectLink to={link.PAGE_CONTACT}>
+                                    or contact us for more
+                                </RedirectLink>
+                            </Link>
                         </Typography>
                     </div>
                 </Grid>

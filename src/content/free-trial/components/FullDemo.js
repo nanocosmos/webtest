@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Grid, Button } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 import * as link from '../../../utilities/link-config';
 
 import h5live from '../../../assets/icons/orange-play.png';
@@ -12,6 +12,7 @@ import Overline from '../../../layout/withStyles/Header/Overline';
 import BoldTitle from '../../../layout/withStyles/Header/BoldTitle';
 import Underline from '../../../layout/withStyles/Header/Underline';
 import HeaderWrapper from '../../../layout/withStyles/Header/Wrapper';
+import RedirectLink from '../../../layout/withStyles/RedirectLink';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -69,7 +70,7 @@ export default function FullDemo() {
                         nanoStream Cloud
                     </BoldTitle>
                     <Underline color="secondary">
-                    Try the best streaming solution including:
+                        Try the best streaming solution including:
                     </Underline>
                 </HeaderWrapper>
             </Grid>
@@ -108,11 +109,15 @@ export default function FullDemo() {
                 </div>
             </Grid>
             <Grid className={classes.buttonWrapper} item xs={12}>
-                <Button onClick={() => { window.open(link.PAGE_FREE_TRIAL, "_self") }} className={classes.button} variant="contained" color="primary">
-                    START YOUR FREE TRIAL                    
+                <Button className={classes.button} variant="contained" color="primary">
+                    <RedirectLink to={link.PAGE_FREE_TRIAL}>
+                        START YOUR FREE TRIAL
+                    </RedirectLink>
                 </Button>
-                <Button onClick={() => { window.open(link.LANDING_PAGE, "_self")}} variant="outlined" color="primary">
-                    LEARN MORE
+                <Button variant="outlined" color="primary">
+                    <RedirectLink to={link.LANDING_PAGE}>
+                        LEARN MORE
+                    </RedirectLink>
                 </Button>
             </Grid>
         </Grid>

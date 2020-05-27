@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { IconButton, Drawer, Divider, ListItemText, ListItemIcon, ListItem, Collapse, Hidden } from '@material-ui/core';
 import { Menu, Mail, Widgets, MoreVert, MenuBook, Duo, Payment, Group, ExpandMore, ExpandLess, Home } from '@material-ui/icons'
@@ -93,6 +94,7 @@ export default function Navigation() {
     const classes = useStyles();
     const [openMobileMenu, setOpenMobileMenu] = useState(false);
     const [openCollapse, setOpenCollapse] = useState(updateCollapseState(listItems));
+    const [redirectRoute, setRedirectRoute] = useState(null);
 
     const toggleDrawer = (open) => {
         setOpenMobileMenu(open)
@@ -103,7 +105,7 @@ export default function Navigation() {
     }
 
     const redirect = (link) => {
-        window.open(`${link}`, "_self")
+        setRedirectRoute(<Redirect to={link}/>)
         setOpenMobileMenu(false);
     }
 
@@ -175,6 +177,7 @@ export default function Navigation() {
 
     return (
         <div>
+            {redirectRoute}
             <Hidden mdUp>
                 <IconButton
                     color="inherit"

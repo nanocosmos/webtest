@@ -5,6 +5,7 @@ import * as link from '../../../utilities/link-config';
 
 import logo from '../../../assets/logo/white-atw-logo.png';
 import { PlayCircleFilled } from '@material-ui/icons';
+import RedirectLink from '../../../layout/withStyles/RedirectLink';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -132,18 +133,20 @@ export default function Intro() {
                                 color="secondary"
                                 variant="contained"
                                 className={classes.button}
-                                onClick={() => { window.open(link.PAGE_CONTACT, "_self") }}
                             >
-                                CONTACT US
+                                <RedirectLink to={link.PAGE_CONTACT}>
+                                    CONTACT US
+                                </RedirectLink>
                             </Button>
                             <Button
                                 startIcon={ <PlayCircleFilled/> }
                                 color="secondary"
                                 variant="outlined"
                                 className={classes.button}
-                                onClick={() => { window.open(link.PAGE_VIDEOS, "_self") }}
                             >
-                                Explore
+                                <RedirectLink to={link.PAGE_VIDEOS}>
+                                    Explore
+                                </RedirectLink>
                             </Button>
                         </div>
                     </div>

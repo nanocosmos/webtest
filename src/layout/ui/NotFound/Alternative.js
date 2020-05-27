@@ -1,8 +1,8 @@
 import React from 'react';
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Button } from '@material-ui/core';
 import { ArrowRightAlt } from '@material-ui/icons';
+import RedirectLink from '../../withStyles/RedirectLink';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,13 +49,14 @@ export default function Alternative(props) {
                 {props.description.description}
             </Typography>
             <div className={classes.buttonWrapper}>
-                <Button 
+                <Button
                     size="small"
                     color="secondary"
-                    endIcon={ <ArrowRightAlt/> }
-                    onClick={() => { window.open(props.description.link, '_self') }}
+                    endIcon={<ArrowRightAlt />}
                 >
-                    {props.description.button}
+                    <RedirectLink to={props.description.link}>
+                        {props.description.button}
+                    </RedirectLink>
                 </Button>
             </div>
         </div>

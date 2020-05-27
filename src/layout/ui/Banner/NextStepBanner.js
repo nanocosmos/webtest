@@ -4,6 +4,7 @@ import { Typography, Grid, Button } from '@material-ui/core';
 
 import * as link from '../../../utilities/link-config';
 import image from '../../../assets/icons/white-rocket.png'
+import RedirectLink from '../../withStyles/RedirectLink';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -64,9 +65,10 @@ export default function NextStepBanner() {
                 <Button
                     variant="contained"
                     color="secondary"
-                    onClick={() => { window.open(link.PAGE_NANOSTREAMCLOUD, "_self") }}
                 >
-                    Book your package now
+                    <RedirectLink to={link.PAGE_NANOSTREAMCLOUD}>
+                        Book your package now
+                    </RedirectLink>
                 </Button>
             </Grid>
         </div>

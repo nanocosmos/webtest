@@ -4,6 +4,7 @@ import { Typography, Card, CardContent, Button, Divider } from '@material-ui/cor
 import * as link from '../../../utilities/link-config';
 
 import Including from './Including';
+import RedirectLink from '../../withStyles/RedirectLink';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -128,7 +129,7 @@ export default function Package(props) {
                             "transcoding",
                             "worldwide CDN for large distribution",
                             "private label/rebranding"
-                        ].map( (including, index) => (
+                        ].map((including, index) => (
                             <Including key={`${including}-${index}`} whiteText={true} check={false} incl={including} />
                         ))
                     }
@@ -138,9 +139,10 @@ export default function Package(props) {
                         variant="outlined"
                         color="primary"
                         size="small"
-                        onClick={() => window.open(link.PAGE_GET_A_QUOTE, "_self")}
                     >
-                        Contact us
+                        <RedirectLink to={link.PAGE_GET_A_QUOTE}>
+                            Contact us
+                        </RedirectLink>
                     </Button>
                     <Button
                         variant="contained"

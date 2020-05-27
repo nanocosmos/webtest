@@ -56,7 +56,7 @@ export default function TeamMember(props) {
                 props.linkedin
                 ?
                 <div className={classes.socialMediaWrapper}>
-                    <IconButton className={classes.icon} size="small" onClick={() => { window.open(props.linkedin, '_self')}}>
+                    <IconButton className={classes.icon} size="small" href={props.linkedin}>
                         <LinkedIn fontSize="small"/>
                     </IconButton>
                 </div>

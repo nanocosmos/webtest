@@ -4,6 +4,7 @@ import { Typography, Grid, Button } from '@material-ui/core';
 
 import * as link from '../../../utilities/link-config';
 import image from '../../../assets/icons/white-rocket.png'
+import RedirectLink from '../../withStyles/RedirectLink';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -65,9 +66,10 @@ export default function FreeTrialBanner() {
                 <Button
                     variant="contained"
                     color="secondary"
-                    onClick={() => { window.open(link.PAGE_FREE_TRIAL, "_self") }}
                 >
-                    Free Trial
+                    <RedirectLink to={link.PAGE_FREE_TRIAL}>
+                        Free Trial
+                    </RedirectLink>
                 </Button>
             </Grid>
         </div>

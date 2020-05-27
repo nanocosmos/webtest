@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function Pricing() {
+export default function AboutUs() {
   const classes = useStyles();
   const [employees, setEmployees] = useState([])
   const [management, setManagement] = useState([])

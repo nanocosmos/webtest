@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Redirect } from 'react-router-dom';
 import { Typography, Grid, Link } from '@material-ui/core';
 import { Twitter, Facebook, LinkedIn } from '@material-ui/icons';
 import * as link from '../utilities/link-config';
@@ -57,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
         lineHeight: 1,
         textAlign: 'center'
     },
-    links: {
+    links: {
         "&:hover": {
             cursor: 'pointer'
         },
@@ -67,39 +68,45 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Footer() {
     const classes = useStyles();
+    const [redirectRoute, setRedirectRoute] = useState(null);
+
+    const redirect = (link) => {
+        setRedirectRoute(<Redirect to={link}/>)
+    }
 
     return (
         <div className={classes.root}>
+            {redirectRoute}
             <Grid container className={classes.container}>
                 <Grid className={classes.contactWrapper} item xs={12}>
                     <div>
-                        <img src={logo} className={classes.logo}/>
+                        <img src={logo} className={classes.logo} />
                     </div>
                     <div className={classes.contacts}>
-                        <Facebook onClick={() => { window.open(link.FACEBOOK, "_self") }} color="primary" />
-                        <LinkedIn onClick={() => { window.open(link.LINKEDIN, "_self") }} color="primary" />
-                        <Twitter onClick={() => { window.open(link.TWITTER, "_self") }} color="primary" />                        
+                        <Facebook href={link.FACEBOOK} color="primary" />
+                        <LinkedIn href={link.LINKEDIN} color="primary" />
+                        <Twitter href={link.TWITTER} color="primary" />
                     </div>
 
                 </Grid>
                 <Grid item xs={12}>
                     <Typography variant="overline" className={classes.links}>
-                        <Link onClick={() => { window.open(link.LANDING_PAGE, "_self") }}>Home</Link>
+                        <Link onClick={() => { redirect(link.LANDING_PAGE) }}>Home</Link>
                     </Typography>
                     <Typography variant="overline" className={classes.links}>
-                        <Link onClick={() => { window.open(link.BLOG, "_self") }}>Blog</Link>
+                        <Link onClick={() => { redirect(link.PAGE_BLOG) }}>Blog</Link>
                     </Typography>
                     <Typography variant="overline" className={classes.links}>
-                        <Link onClick={() => { window.open(link.PAGE_FREE_TRIAL, "_self") }}>Free trial</Link>
+                        <Link onClick={() => { redirect(link.PAGE_FREE_TRIAL) }}>Free trial</Link>
                     </Typography>
                     <Typography variant="overline" className={classes.links}>
-                        <Link onClick={() => { window.open(link.DOCS, "_self") }}>Docs</Link>
+                        <Link href={link.DOCS}>Docs</Link>
                     </Typography>
                     <Typography variant="overline" className={classes.links}>
-                        <Link onClick={() => { window.open(link.PAGE_PRICING, "_self") }}>Pricing</Link>
+                        <Link onClick={() => { redirect(link.PAGE_PRICING) }}>Pricing</Link>
                     </Typography>
                     <Typography variant="overline" className={classes.links}>
-                        <Link onClick={() => { window.open(link.CONTACT, "_self") }}>Contact</Link>
+                        <Link onClick={() => { redirect(link.PAGE_CONTACT) }}>Contact</Link>
                     </Typography>
                 </Grid>
                 <Grid className={classes.item} item xs={12}>
@@ -113,7 +120,7 @@ export default function Footer() {
                         variant="overline"
                         className={classes.underlineText}
                     >
-                        <Link onClick={() => { window.open(link.PAGE_IMPRINT, "_self") }}>Legal Information</Link>
+                        <Link onClick={() => { redirect(link.PAGE_IMPRINT) }}>Legal Information</Link>
                     </Typography>
                 </Grid>
             </Grid>
