@@ -1,9 +1,9 @@
 import React from 'react';
-import ExploreBanner from '../layout/ui/Banner/ExploreBanner';
-import FreeTrialBanner from '../layout/ui/Banner/FreeTrialBanner';
-import JoinOurTeamBanner from '../layout/ui/Banner/JoinOurTeam';
-import NextStepBanner from '../layout/ui/Banner/NextStepBanner';
-import PricingBanner from '../layout/ui/Banner/PricingBanner';
+import ExploreBanner from '../components/ui/Banner/ExploreBanner';
+import FreeTrialBanner from '../components/ui/Banner/FreeTrialBanner';
+import JoinOurTeamBanner from '../components/ui/Banner/JoinOurTeam';
+import NextStepBanner from '../components/ui/Banner/NextStepBanner';
+import PricingBanner from '../components/ui/Banner/PricingBanner';
 
 export const getBanner = (banner) => {
     console.log(banner)
