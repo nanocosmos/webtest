@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../utilities/theme';
-import Layout from '../components/layout/toolbar/Layout';
+import Layout from '../components/layout/Layout';
 
 export default function Website(props) {
     const { Component, pageProps } = props;

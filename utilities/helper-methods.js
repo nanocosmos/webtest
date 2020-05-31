@@ -1,21 +1,31 @@
 import React from 'react';
-import ExploreBanner from '../components/ui/Banner/ExploreBanner';
-import FreeTrialBanner from '../components/ui/Banner/FreeTrialBanner';
-import JoinOurTeamBanner from '../components/ui/Banner/JoinOurTeam';
-import NextStepBanner from '../components/ui/Banner/NextStepBanner';
-import PricingBanner from '../components/ui/Banner/PricingBanner';
+// import ExploreBanner from '../components/ui/Banner/ExploreBanner';
+// import FreeTrialBanner from '../components/ui/Banner/FreeTrialBanner';
+// import JoinOurTeamBanner from '../components/ui/Banner/JoinOurTeam';
+// import NextStepBanner from '../components/ui/Banner/NextStepBanner';
+// import PricingBanner from '../components/ui/Banner/PricingBanner';
 
-export const getBanner = (banner) => {
-    console.log(banner)
-    switch(banner) {
-        case "Explore": return <ExploreBanner/>;
-        case "FreeTrial": return <FreeTrialBanner/>;
-        case "JoinOurTeam": return <JoinOurTeamBanner/>;
-        case "NextStep": return <NextStepBanner/>;
-        case "Pricing": return <PricingBanner/>;
-        default: return <ExploreBanner/>
-    }
+export function getAllPostIds(posts) {
+    return posts.map(post => {
+        return {
+            params: {
+                id: `${post.id}`
+            }
+        }
+    })
 }
+
+// export const getBanner = (banner) => {
+//     console.log(banner)
+//     switch(banner) {
+//         case "Explore": return <ExploreBanner/>;
+//         case "FreeTrial": return <FreeTrialBanner/>;
+//         case "JoinOurTeam": return <JoinOurTeamBanner/>;
+//         case "NextStep": return <NextStepBanner/>;
+//         case "Pricing": return <PricingBanner/>;
+//         default: return <ExploreBanner/>
+//     }
+// }
 
 export const generateBlogPostDate = (time) => {
     const date = new Date(time)
