@@ -9,7 +9,7 @@
     "export": "next export",
     "copy": "cp ./CNAME ./out/CNAME",
     "gh-deploy": "gh-pages -d out",
-    "deploy": "next build && next export && npm run copy && npm run biuld gh-deploy"
+    "deploy": "next build && next export && npm run copy && npm run gh-deploy"
   },
   "dependencies": {
     "@material-ui/core": "^4.10.0",
