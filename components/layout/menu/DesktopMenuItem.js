@@ -84,7 +84,7 @@ export default function DesktopMenuItem(props) {
                     props.menuItem.submenu
                         ? props.menuItem.name
                         :
-                        <Link style={classes.link} href={props.menuItem.link}>
+                        <Link href={props.menuItem.link}>
                             <a className={classes.link}>
                                 {props.menuItem.name}
                             </a>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Router from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Button } from '@material-ui/core';
 import Menu from '../menu/Menu';
@@ -40,15 +41,11 @@ const useStyles = makeStyles((theme) => ({
 export default function Header(props) {
     const classes = useStyles();
 
-    const redirect = (link) => {
-        console.log(link)
-    }
-
     return (
         <AppBar className={classes.root} elevation={0} position="sticky">
             <Toolbar className={classes.toolbar}>
                 <div>
-                    <img className={classes.logo} src='/assets/logo/white-logo.png' onClick={() => { redirect("landingpage") }} />
+                    <img className={classes.logo} src='/assets/logo/white-logo.png' onClick={() => { Router.push("/") }} />
                 </div>
                 <Menu />
             </Toolbar>

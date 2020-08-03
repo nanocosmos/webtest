@@ -16,7 +16,7 @@ function BlogPost({ post }) {
     return (
         <div className={classes.root}>
             <Head>
-                <title>nanocosmos Blogpost</title>
+                <title>nanocosmos {post.title}</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Article

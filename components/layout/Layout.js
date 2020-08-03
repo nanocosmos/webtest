@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Toolbar from './toolbar/Header';
+import Header from './toolbar/Header';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,7 +20,7 @@ export default function Layout(props) {
 
     return (
         <div className={classes.root}>
-            <Toolbar/>
+            <Header />
             <main className={classes.content}>
                 {props.children}
             </main>

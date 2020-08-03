@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 import { Card, CardHeader, CardContent, CardMedia, Avatar, Typography, CardActions, Button } from '@material-ui/core';
 import { ArrowRightAlt } from '@material-ui/icons';
 import { Skeleton } from '@material-ui/lab';
@@ -9,52 +9,16 @@ import * as link from '../../../utilities/link-config';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        [theme.breakpoints.up('xs')]: {
-            width: '100%',
-            margin: theme.spacing(2),
-
-        },
-        [theme.breakpoints.up('sm')]: {
-            width: '46%',
-            margin: theme.spacing(1),
-        },
-        [theme.breakpoints.up('md')]: {
-            width: '31%'
-        },
-        [theme.breakpoints.up('lg')]: {
-            width: '23%'
-        },
-        [theme.breakpoints.up('xl')]: {}
+        width: 'auto',
+        height: '100%'
     },
     contentWrapper: {
 
     },
     media: {
         [theme.breakpoints.up('xs')]: {
-            height: 170
-        },
-        [theme.breakpoints.up('380')]: {
-            height: 200
-        },
-        [theme.breakpoints.up('440')]: {
-            height: 210
-        },
-        [theme.breakpoints.up('470')]: {
-            height: 240
-        },
-        [theme.breakpoints.up('530')]: {
-            height: 260
-        },
-        [theme.breakpoints.up('sm')]: {
             height: 190
         },
-        [theme.breakpoints.up('md')]: {
-            height: 160
-        },
-        [theme.breakpoints.up('lg')]: {
-            height: 180
-        },
-        [theme.breakpoints.up('xl')]: {}
     },
     tag: {
         padding: theme.spacing(0.5, 1, 0.5, 1),
@@ -84,15 +48,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Preview(props) {
     const classes = useStyles();
-    const router = useRouter();
-
 
     const loading = props.loading
     const article = props.post
-
-    const redirect = (id) => {
-        router.push(`/blogpost/${id}`)
-    }
 
     return (
         <Card className={classes.root}>
@@ -169,7 +127,7 @@ export default function Preview(props) {
                             size="small"
                             color="primary"
                             endIcon={<ArrowRightAlt />}
-                            onClick={() => redirect(article.id)}>
+                            onClick={() => { Router.push(`/blogpost/${article.id}`) }}>
                             Read more
                     </Button>
                 }

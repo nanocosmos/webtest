@@ -5,6 +5,7 @@ import IntroCenterImage from '../components/layout/intro/IntroCenterImage'
 import * as link from '../utilities/link-config';
 import Preview from '../components/content/blog/Preview';
 import { Pagination } from '@material-ui/lab';
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,11 +21,9 @@ const useStyles = makeStyles((theme) => ({
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            margin: theme.spacing(2)
         },
         [theme.breakpoints.up('sm')]: {
             flexDirection: 'row',
-            flexWrap: 'wrap',
             alignItems: 'stretch'
         },
         [theme.breakpoints.up('md')]: {
@@ -32,13 +31,27 @@ const useStyles = makeStyles((theme) => ({
         },
         [theme.breakpoints.up('lg')]: {},
         [theme.breakpoints.up('xl')]: {}
+    },
+    gridItem: {
+        [theme.breakpoints.up('xs')]: {
+            display: 'block',
+            width: '90%',
+            marginBottom: theme.spacing(2),
+        },
+        [theme.breakpoints.up('sm')]: {
+            margin: theme.spacing(1.5)
+        }
     }
 }));
 
-function Blog({ posts }) {
+function Blog({ posts, postsCount }) {
     const classes = useStyles();
     const [amountShown] = useState(12);
-    const [count, setCount] = useState(Math.ceil(posts.length/amountShown));
+    const [count, setCount] = useState(Math.ceil(postsCount / amountShown));
+    const [limit, setLimit] = useState({
+        start: 0,
+        limit: amountShown
+    })
 
     const pageChanged = (event, value) => {
         console.log(event, value)
@@ -55,13 +68,15 @@ function Blog({ posts }) {
                 title="nanocosmos Blog"
                 subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat."
             />
-            <div className={classes.previewWrapper}>
+            <Grid container className={classes.previewWrapper}>
                 {
                     posts.map((post, index) => (
-                        <Preview post={post} key={index} />
+                        <Grid  key={index} className={classes.gridItem} item xs={12} sm={5} md={3}>
+                            <Preview post={post} />
+                        </Grid>
                     ))
                 }
-            </div>
+            </Grid>
             <div className={classes.pagination}>
                 <Pagination showFirstButton showLastButton onChange={pageChanged} count={count} />
             </div>
@@ -70,12 +85,15 @@ function Blog({ posts }) {
 }
 
 export async function getStaticProps() {
-    const res = await fetch(`${link.STRAPI_URL}/articles`);
-    const posts = await res.json();
+    const resArticles = await fetch(`${link.STRAPI_URL}/articles`);
+    const resCountArticles = await fetch(`${link.STRAPI_URL}/articles/count`);
+    const posts = await resArticles.json();
+    const postsCount = await resCountArticles.json();
 
     return {
         props: {
-            posts
+            posts,
+            postsCount
         }
     }
 }

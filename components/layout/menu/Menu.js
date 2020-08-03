@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 import { IconButton, Drawer, Divider, ListItemText, ListItemIcon, ListItem, Collapse, Hidden } from '@material-ui/core';
 import { Menu, Mail, Widgets, MoreVert, MenuBook, Duo, Payment, Group, ExpandMore, ExpandLess, Home } from '@material-ui/icons'
 import * as link from '../../../utilities/link-config';
@@ -36,6 +36,22 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: theme.palette.common.white,
             boxShadow: theme.shadows[4]
         }
+    },
+    mobileMenu: {
+        [theme.breakpoints.up('xs')]: {
+            display: 'block'
+        },
+        [theme.breakpoints.up('md')]: {
+            display: 'none'
+        },
+    },
+    desktopMenu: {
+        [theme.breakpoints.up('xs')]: {
+            display: 'none'
+        },
+        [theme.breakpoints.up('md')]: {
+            display: 'block'
+        },
     }
 }));
 
@@ -47,7 +63,7 @@ const productsSubSubmenu = [
 ]
 
 const productsSubmenu = [
-    { name: "nanoStream Cloud", link: link.PAGE_NANOSTREAMCLOUD, submenu: productsSubSubmenu},
+    { name: "nanoStream Cloud", link: link.PAGE_NANOSTREAMCLOUD, submenu: productsSubSubmenu },
     { name: "nanoStream Apps & SDK", link: link.PAGE_APPS_AND_SDKS },
     { name: "Explore", link: link.PAGE_EXPLORE }
 ]
@@ -73,7 +89,7 @@ const listItems = [
     { name: "Pricing", icon: <Payment style={{ color: '#fff' }} />, link: link.PAGE_PRICING },
     { name: "About us", icon: <Group style={{ color: '#fff' }} />, link: "", submenu: aboutusSubmenu },
     { name: "Free Trial", icon: <Duo style={{ color: '#ed7d0e' }} />, link: link.PAGE_FREE_TRIAL, className: "highlight" },
-    { name: "Contact", icon: <Mail style={{ color: '#fff' }} />, link: link.PAGE_CONTACT, className: "outlined"}
+    { name: "Contact", icon: <Mail style={{ color: '#fff' }} />, link: link.PAGE_CONTACT, className: "outlined" }
 ]
 
 const updateCollapseState = (menuList) => {
@@ -91,7 +107,6 @@ const updateCollapseState = (menuList) => {
 
 export default function Navigation() {
     const classes = useStyles();
-    const router = useRouter();
     const [openMobileMenu, setOpenMobileMenu] = useState(false);
     const [openCollapse, setOpenCollapse] = useState(updateCollapseState(listItems));
 
@@ -103,104 +118,91 @@ export default function Navigation() {
         return openCollapse[itemName] === true ? <ExpandLess /> : <ExpandMore />
     }
 
-    const redirect = (link) => {
-        router.push(link)
-        setOpenMobileMenu(false);
-    }
-
     const collapseSubmenu = (menuItem) => {
         let updatedList = openCollapse
         let updatedValue = openCollapse[menuItem]
         Object.keys(updatedList).forEach(item => updatedList[item] = false)
-        setOpenCollapse({ 
-            ...updatedList, 
+        setOpenCollapse({
+            ...updatedList,
             [menuItem]: !updatedValue
         })
     }
 
 
-    let desktopMenu = (
-        <div classes={classes.menuList}>
-            {
-                listItems.map((menuItem, index) => (
-                    <DesktopMenuItem key={`${menuItem.name}-${index}`} menuItem={menuItem}/>
-                ))
-            }
-        </div>
-    );
-
-    let mobileMenu = (
-        <div className={classes.menuList}
-            role="presentation"
-        >
-            {
-                listItems.map((menuItem, index) => (
-                    <span key={`${menuItem.name}-${index}`}>
-                        <ListItem 
-                            button 
-                            className={menuItem.className ? classes[menuItem.className] : ""}
-                            onClick={() => { menuItem.submenu ? collapseSubmenu(menuItem.name) : redirect(menuItem.link) }}
-                        >
-                            <ListItemIcon>{menuItem.icon}</ListItemIcon>
-                            <ListItemText classes={{ primary: classes.listItemText }} primary={menuItem.name} />
-                            {
-                                menuItem.submenu
-                                    ? getExpandIcon(menuItem.name)
-                                    : null
-                            }
-                        </ListItem>
-                        {
-                            menuItem.submenu
-                                ?
-                                <Collapse in={openCollapse[menuItem.name]}>
-                                    {
-                                        menuItem.submenu.map((menuItem, index) => (
-                                            <ListItem 
-                                                button
-                                                className={classes.submenu} 
-                                                key={`${menuItem.name}-${index}`}
-                                                onClick={() => { redirect(menuItem.link) }}
-                                            >
-                                                <ListItemText primary={menuItem.name} />
-                                            </ListItem>
-                                        ))
-                                    }
-                                </Collapse>
-                                : null
-                        }
-                    </span>
-                ))
-            }
-        </div>
-    )
-
     return (
         <div>
-            <Hidden mdUp>
+            <div className={classes.mobileMenu}>
                 <IconButton
                     color="inherit"
                     edge="start"
                     onClick={() => { toggleDrawer(true) }}
                     className={classes.menuButton}
                 >
-                    <Menu style={{ color: '#fff' }}/>
+                    <Menu style={{ color: '#fff' }} />
                 </IconButton>
-            </Hidden>
+            </div>
             <nav>
-                <Hidden mdUp>
+                <div className={classes.mobileMenu}>
                     <Drawer
                         classes={{ paper: classes.root }}
                         open={openMobileMenu}
-                        onClose={() => {setOpenMobileMenu(false)}}
+                        onClose={() => { setOpenMobileMenu(false) }}
                     >
                         <img className={classes.logo} src='/assets/logo/white-logo.png' />
                         <Divider />
-                        {mobileMenu}
+                        <div className={classes.menuList}
+                            role="presentation"
+                        >
+                            {
+                                listItems.map((menuItem, index) => (
+                                    <span key={`${menuItem.name}-${index}`}>
+                                        <ListItem
+                                            button
+                                            className={menuItem.className ? classes[menuItem.className] : ""}
+                                            onClick={() => { menuItem.submenu ? collapseSubmenu(menuItem.name) : Router.push(menuItem.link) }}
+                                        >
+                                            <ListItemIcon>{menuItem.icon}</ListItemIcon>
+                                            <ListItemText classes={{ primary: classes.listItemText }} primary={menuItem.name} />
+                                            {
+                                                menuItem.submenu
+                                                    ? getExpandIcon(menuItem.name)
+                                                    : null
+                                            }
+                                        </ListItem>
+                                        {
+                                            menuItem.submenu
+                                                ?
+                                                <Collapse in={openCollapse[menuItem.name]}>
+                                                    {
+                                                        menuItem.submenu.map((menuItem, index) => (
+                                                            <ListItem
+                                                                button
+                                                                className={classes.submenu}
+                                                                key={`${menuItem.name}-${index}`}
+                                                                onClick={() => { Router.push(menuItem.link) }}
+                                                            >
+                                                                <ListItemText primary={menuItem.name} />
+                                                            </ListItem>
+                                                        ))
+                                                    }
+                                                </Collapse>
+                                                : null
+                                        }
+                                    </span>
+                                ))
+                            }
+                        </div>
                     </Drawer>
-                </Hidden>
-                <Hidden smDown>
-                    {desktopMenu}
-                </Hidden>
+                </div>
+                <div className={classes.desktopMenu}>
+                    <div classes={classes.menuList}>
+                        {
+                            listItems.map((menuItem, index) => (
+                                <DesktopMenuItem key={`${menuItem.name}-${index}`} menuItem={menuItem} />
+                            ))
+                        }
+                    </div>
+                </div>
             </nav>
         </div>
     );

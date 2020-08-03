@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
+import App from 'next/app';
 import { ThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { CssBaseline } from '@material-ui/core';
 import theme from '../utilities/theme';
 import Layout from '../components/layout/Layout';
 
-export default function Website(props) {
+function Website(props) {
     const { Component, pageProps } = props;
 
     useEffect(() => {
-        // Remove the server-side injected CSS.
         const jssStyles = document.querySelector('#jss-server-side');
         if (jssStyles) {
             jssStyles.parentElement.removeChild(jssStyles);
@@ -31,3 +31,10 @@ export default function Website(props) {
         </React.Fragment>
     );
 }
+
+Website.getInitialProps = async (appContext) => {
+    const appProps = await App.getInitialProps(appContext);
+    return { ...appProps }
+}
+
+export default Website;
